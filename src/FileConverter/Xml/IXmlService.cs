@@ -1,4 +1,4 @@
-﻿namespace CloudCommerceGroup.Converter.Xml
+﻿namespace FileConverter.Xml
 {
     using System.Threading.Tasks;
 

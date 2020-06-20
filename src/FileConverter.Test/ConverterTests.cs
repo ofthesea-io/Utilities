@@ -1,8 +1,7 @@
-﻿namespace CloudCommerceGroup.Converter.Test
+﻿namespace FileConverter.Test
 {
     using System;
     using System.IO;
-    using System.Threading.Tasks;
     using Json;
     using NUnit.Framework;
     using Xml;
@@ -40,7 +39,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, Delimiter));
+            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
         }
 
 
@@ -54,7 +53,7 @@
             // Act
 
             // Assert
-            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, Delimiter));
+            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
             Assert.That(result.Message, Is.EqualTo("File not found. Please enter a file!"));
         }
 
@@ -68,7 +67,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, Delimiter));
+            Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
         }
 
         [Test]
@@ -81,7 +80,7 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, Delimiter));
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
             Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
         }
 
@@ -95,7 +94,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, Delimiter));
+            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
         }
 
         #endregion

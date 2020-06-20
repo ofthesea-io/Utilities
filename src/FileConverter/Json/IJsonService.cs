@@ -1,4 +1,4 @@
-﻿namespace CloudCommerceGroup.Converter.Json
+﻿namespace FileConverter.Json
 {
     using System.Threading.Tasks;
 

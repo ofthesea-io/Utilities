@@ -1,4 +1,4 @@
-﻿namespace CloudCommerceGroup.Converter.Xml
+﻿namespace FileConverter.Xml
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,8 +13,8 @@
             {
                 var keys = content[0].Split(base.Delimiter);
                 var rawObject = content.Skip(1).Select(q => q.Split(base.Delimiter)
-                                                           .Select((x, y) => new { Key = keys[y].Trim(), Value = x })
-                                                           .ToDictionary(_ => _.Key, _ => _.Value));
+                           .Select((x, y) => new { Key = keys[y].Trim(), Value = x })
+                           .ToDictionary(_ => _.Key, _ => _.Value));
 
                 XDocument xDocument = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"));
                 var root = new XElement("root");

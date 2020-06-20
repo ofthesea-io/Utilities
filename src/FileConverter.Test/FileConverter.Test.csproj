@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CloudCommerceGroup.Converter\CloudCommerceGroup.Converter.csproj" />
+    <ProjectReference Include="..\FileConverter\FileConverter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

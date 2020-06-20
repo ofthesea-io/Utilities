@@ -1,4 +1,4 @@
-﻿namespace CloudCommerceGroup.Converter
+﻿namespace FileConverter
 {
     using System;
     using System.IO;
@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using Core;
     using Json;
-    using Microsoft.VisualBasic.FileIO;
     using Xml;
 
     public class Converter : BaseService, IConverter
@@ -86,7 +85,7 @@
                 throw new ArgumentException("Incorrect output");
 
             string result = string.Empty;
-            string? extension = Path.GetExtension(path);
+            string extension = Path.GetExtension(path);
             if (extension == Converter.JsonExt || extension == Converter.XmlExt)
                 result = extension;
 
@@ -95,7 +94,7 @@
 
         private bool ValidateFileExtension(string path)
         {
-            string? extension = Path.GetExtension(path);
+            string extension = Path.GetExtension(path);
             switch (extension.ToLower())
             {
                 case Converter.CsvExt:

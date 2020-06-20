@@ -1,10 +1,9 @@
-﻿namespace CloudCommerceGroup.Converter.Test
+﻿namespace FileConverter.Test
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
     using System.Xml.Linq;
-    using Newtonsoft.Json.Linq;
     using NUnit.Framework;
     using Xml;
 
@@ -34,7 +33,7 @@
                 XDocument xDocument = XDocument.Parse(xml);
                 Assert.NotNull(xDocument);
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 Assert.Fail();
             }

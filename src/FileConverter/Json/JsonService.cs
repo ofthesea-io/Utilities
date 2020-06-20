@@ -1,4 +1,4 @@
-﻿namespace CloudCommerceGroup.Converter.Json
+﻿namespace FileConverter.Json
 {
     using System.Linq;
     using System.Threading.Tasks;

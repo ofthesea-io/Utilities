@@ -1,4 +1,4 @@
-namespace CloudCommerceGroup.Converter.Test
+namespace FileConverter.Test
 {
     using System;
     using System.IO;
@@ -43,7 +43,7 @@ namespace CloudCommerceGroup.Converter.Test
                 JToken token = JToken.Parse(json);
                 Assert.NotNull(token);
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 Assert.Fail();
             }
