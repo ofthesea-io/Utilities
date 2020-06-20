@@ -2,16 +2,14 @@
 {
     using System.Threading.Tasks;
 
-    using CloudCommerceGroup.Converter.Core;
-
-    public class JsonConverter : Converter, IJsonConverter
+    public class JsonService : IJsonService
     {
-        public Task ConvertCsvToJson()
+        public Task ProcessCsvToJson(string input, string output)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task ConvertJsonToCsv()
+        public Task ProcessJsonToCsv(string input, string output)
         {
             throw new System.NotImplementedException();
         }

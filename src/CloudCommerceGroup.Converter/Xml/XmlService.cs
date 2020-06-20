@@ -2,16 +2,14 @@
 {
     using System.Threading.Tasks;
 
-    using CloudCommerceGroup.Converter.Core;
-
-    public class XmlConverter : Converter, IXmlConverter
+    public class XmlService : IXmlService
     {
-        public Task ConvertCsvToXml()
+        public Task ProcessCsvToXml(string input, string output)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task ConvertXmlToCsv()
+        public Task ProcessXmlToCsv(string input, string output)
         {
             throw new System.NotImplementedException();
         }
