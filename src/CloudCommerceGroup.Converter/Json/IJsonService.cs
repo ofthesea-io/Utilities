@@ -4,7 +4,7 @@
 
     public interface IJsonService
     {
-        Task ProcessCsvToJson(string input, string output);
+        Task<string> ProcessCsvToJson(string[] content, string output, char delimiter);
 
         Task ProcessJsonToCsv(string input, string output);
     }
