@@ -2,11 +2,14 @@
 {
     using System;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
+    using Core;
     using Json;
+    using Microsoft.VisualBasic.FileIO;
     using Xml;
 
-    public class Converter : IConverter
+    public class Converter : BaseService, IConverter
     {
         #region Fields
 
@@ -34,14 +37,28 @@
         {
             string[] content = this.ValidateInputFile(input);
             string extension = this.GetOutputExtension(output);
+            string data = string.Empty;
 
             if (!string.IsNullOrEmpty(extension))
             {
                 if (extension == Converter.JsonExt)
-                    await this.jsonService.ProcessCsvToJson(content, output, delimiter);
+                 data = await this.jsonService.ProcessCsvToJson(content);
                 if (extension == Converter.XmlExt)
-                    await this.xmlService.ProcessCsvToXml(input, output);
+                 data = await this.xmlService.ProcessCsvToXml(content);
+
+                await this.Save(output, data);
             }
+        }
+
+        private async Task Save(string output, string content)
+        {
+            if(string.IsNullOrEmpty(content))
+                throw new ArgumentException("No content to save!");
+
+            if(File.Exists(output))
+                File.Delete(output);
+
+            await File.WriteAllTextAsync(output, content, Encoding.UTF8);
         }
 
         private string[] ValidateInputFile(string path)
@@ -56,6 +73,11 @@
                 throw new ArgumentException("No data found in file!");
 
             return File.ReadAllLines(path);
+        }
+
+        private bool ParseCsv(string input)
+        {
+            return true;
         }
 
         private string GetOutputExtension(string path)

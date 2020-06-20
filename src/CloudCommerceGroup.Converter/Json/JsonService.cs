@@ -2,18 +2,19 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using Core;
     using Newtonsoft.Json;
 
-    public class JsonService : IJsonService
+    public class JsonService : BaseService, IJsonService
     {
-        public async Task<string> ProcessCsvToJson(string[] content, string output, char delimiter)
+        public async Task<string> ProcessCsvToJson(string[] content)
         {
             return await Task.Run(() =>
             {
-                var keys = content[0].Split(delimiter);
-                var rawObject = content.Skip(1).Select(q => q.Split(delimiter))
-                    .Select((x, y) => new {Key = keys[y], Value = y})
-                    .ToDictionary(_ => _.Key, _ => _.Value);
+                var keys = content[0].Split(base.Delimiter);
+                var rawObject = content.Skip(1).Select(q => q.Split(base.Delimiter)
+                    .Select((x, y) => new { Key = keys[y].Trim(), Value = x })
+                    .ToDictionary(_ => _.Key, _ => _.Value));
 
                 var json = JsonConvert.SerializeObject(rawObject, Formatting.Indented);
 
@@ -23,7 +24,7 @@
 
         public Task ProcessJsonToCsv(string content, string output)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException("Currently not implemented");
         }
     }
 }

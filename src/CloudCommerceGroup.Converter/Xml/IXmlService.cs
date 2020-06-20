@@ -4,7 +4,7 @@
 
     public interface IXmlService
     {
-        Task ProcessCsvToXml(string input, string output);
+        Task<string> ProcessCsvToXml(string[] content);
 
         Task ProcessXmlToCsv(string input, string output);
     }
