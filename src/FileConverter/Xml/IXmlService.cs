@@ -6,6 +6,6 @@
     {
         Task<string> ProcessCsvToXml(string[] content);
 
-        Task ProcessXmlToCsv(string input, string output);
+        Task<string> ProcessXmlToCsv(string input);
     }
 }

@@ -4,6 +4,8 @@
 
     public interface IConverter
     {
-        Task Process(string input, string output, char delimiter);
+        char Delimiter { get; set; }
+
+        Task Process(string input, string output);
     }
 }

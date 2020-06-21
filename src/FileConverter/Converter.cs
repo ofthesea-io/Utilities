@@ -27,16 +27,15 @@
             this.xmlService = xmlService;
             this.jsonService = jsonService;
         }
-
+            
         #endregion
 
         #region Methods
 
-        public async Task Process(string input, string output, char delimiter)
+        public async Task Process(string input, string output)
         {
             string[] content = this.ValidateInputFile(input);
             string extension = this.ValidateOutputFile(output);
-            ParseCsv(ref content);
             string data = string.Empty;
 
             if (!string.IsNullOrEmpty(extension))
@@ -77,15 +76,18 @@
         private string[] ValidateInputFile(string path)
         {
             if (!File.Exists(path))
-                throw new FileNotFoundException("File not found. Please enter a file!");
+                throw new FileNotFoundException("Input file not found. Please enter a file!");
 
             if (!this.ValidateFileExtension(path))
-                throw new NotSupportedException("Invalid file. Please enter a valid file!");
+                throw new NotSupportedException("Invalid input file. Please enter a valid file!");
 
             if (File.ReadAllText(path).Length == 0)
                 throw new ArgumentException("No data found in file!");
 
-            return File.ReadAllLines(path);
+            var data = File.ReadAllLines(path);
+            this.ParseCsv(ref data);
+
+            return data;
         }
 
         /// <summary>
@@ -99,7 +101,7 @@
         private string ValidateOutputFile(string path)
         {
             if (string.IsNullOrEmpty(path))
-                throw new FileNotFoundException("File not found. Please enter a file!");
+                throw new FileNotFoundException("Output file not found. Please enter a file!");
 
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException("Incorrect output");
@@ -127,7 +129,10 @@
                 throw new NullReferenceException("CSV file is empty");
 
             int columns = content[0].Split(this.Delimiter).Length;
-            for (int i = 1; i <= content.Length; i++)
+            if (columns == 1)
+                throw new InvalidDataException("Invalid delimiter!");
+
+            for (int i = 1; i < content.Length; i++)
             {
                int j = content[i].Split(this.Delimiter).Length;
                if (j != columns)

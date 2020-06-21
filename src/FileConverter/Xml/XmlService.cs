@@ -7,6 +7,11 @@
 
     public class XmlService : BaseService, IXmlService
     {
+        /// <summary>
+        ///     Converts the csv file into xml
+        /// </summary>
+        /// <param name="content">csv content</param>
+        /// <returns>formatted xml string</returns>
         public async Task<string> ProcessCsvToXml(string[] content)
         {
             return await Task.Run(() =>
@@ -34,7 +39,7 @@
             });
         }
 
-        public Task ProcessXmlToCsv(string input, string output)
+        public Task<string> ProcessXmlToCsv(string input)
         {
             throw new System.NotImplementedException();
         }

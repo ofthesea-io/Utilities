@@ -7,6 +7,11 @@
 
     public class JsonService : BaseService, IJsonService
     {
+        /// <summary>
+        ///     Converts the csv file into json
+        /// </summary>
+        /// <param name="content">csv content</param>
+        /// <returns>formatted json string</returns>
         public async Task<string> ProcessCsvToJson(string[] content)
         {
             return await Task.Run(() =>
@@ -22,7 +27,12 @@
             });
         }
 
-        public Task ProcessJsonToCsv(string content, string output)
+        /// <summary>
+        ///  Not yet implemented
+        /// </summary>
+        /// <param name="content">json string</param>
+        /// <returns>csv string</returns>
+        public Task<string> ProcessJsonToCsv(string content)
         {
             throw new System.NotImplementedException("Currently not implemented");
         }

@@ -6,7 +6,7 @@
     using NUnit.Framework;
     using Xml;
 
-    public class JConverterTests
+    public class ConverterTests
     {
         #region Fields
 
@@ -39,7 +39,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output));
         }
 
 
@@ -53,8 +53,8 @@
             // Act
 
             // Assert
-            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
-            Assert.That(result.Message, Is.EqualTo("File not found. Please enter a file!"));
+            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output));
+            Assert.That(result.Message, Is.EqualTo("Input file not found. Please enter a file!"));
         }
 
         [Test]
@@ -67,7 +67,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output));
         }
 
         [Test]
@@ -80,8 +80,8 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
-            Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output));
+            Assert.That(result.Message, Is.EqualTo("Invalid input file. Please enter a valid file!"));
         }
 
         [Test]
@@ -94,7 +94,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output));
         }
 
         [Test]
@@ -107,7 +107,7 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
         }
 
@@ -121,8 +121,8 @@
             // Act
 
             // Assert
-            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
-            Assert.That(result.Message, Is.EqualTo("File not found. Please enter a file!"));
+            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output));
+            Assert.That(result.Message, Is.EqualTo("Output file not found. Please enter a file!"));
         }
 
         [Test]
@@ -135,8 +135,26 @@
             // Act
 
             // Assert
-            InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() => this.converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("CSV data validation failed!"));
+        }
+
+        [Test]
+        public void Process_WhenInValidDelimiterIsPassed_ShouldThrowInvalidDataException()
+        {
+            // Arrange
+            string input = "Documents/Valid.csv";
+            string output = "output.json";
+            char delimiter = ';';
+            // Act
+
+            // Assert
+            InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() =>
+            {
+                this.converter.Delimiter = delimiter;
+                return this.converter.Process(input, output);
+            });
+            Assert.That(result.Message, Is.EqualTo("Invalid delimiter!"));
         }
 
         #endregion

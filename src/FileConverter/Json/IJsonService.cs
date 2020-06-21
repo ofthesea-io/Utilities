@@ -6,6 +6,6 @@
     {
         Task<string> ProcessCsvToJson(string[] content);
 
-        Task ProcessJsonToCsv(string input, string output);
+        Task<string> ProcessJsonToCsv(string input);
     }
 }

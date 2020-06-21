@@ -2,6 +2,6 @@
 {
     public abstract class BaseService
     {
-        protected char Delimiter = ',';
+        public virtual char Delimiter { get; set; } = ',';
     }
 }

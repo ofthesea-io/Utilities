@@ -12,7 +12,7 @@
     {
         #region Fields
 
-        private static IServiceProvider serviceProvider;
+        private static IServiceProvider _serviceProvider;
 
         #endregion
 
@@ -22,20 +22,23 @@
         {
             Program.RegisterServices();
 
-            var converter = Program.serviceProvider.GetService<IConverter>();
+            var converter = _serviceProvider.GetService<IConverter>();
 
             var command = new RootCommand
             {
-                new Option("--i") { Argument = new Argument<string>() },
-                new Option("--o") { Argument = new Argument<string>() },
-                new Option("--d") { Argument = new Argument<char>() }
+                new Option("--i", "Input file") { Argument = new Argument<string>() },
+                new Option("--o", "Output file") { Argument = new Argument<string>() },
+                new Option("--d", "Delimiter") { Argument = new Argument<char>() }
             };
 
             command.Handler = CommandHandler.Create(async (string i, string o, char d) =>
             {
                 try
                 {
-                    await converter.Process(i, o, d);
+                    if (d != '\0')
+                        converter.Delimiter = (char)d;
+
+                    await converter.Process(i, o);
                 }
                 catch (Exception e)
                 {
@@ -54,16 +57,16 @@
             services.AddSingleton<IXmlService, XmlService>();
             services.AddSingleton<IJsonService, JsonService>();
             services.AddSingleton<IConverter, Converter>();
-            Program.serviceProvider = services.BuildServiceProvider(true);
+            Program._serviceProvider = services.BuildServiceProvider(true);
         }
 
         private static void DisposeServices()
         {
-            if (Program.serviceProvider == null)
+            if (Program._serviceProvider == null)
                 return;
 
-            if (Program.serviceProvider is IDisposable)
-                ((IDisposable)Program.serviceProvider).Dispose();
+            if (Program._serviceProvider is IDisposable)
+                ((IDisposable)Program._serviceProvider).Dispose();
         }
 
         #endregion
