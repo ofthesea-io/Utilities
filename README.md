@@ -5,7 +5,9 @@
 
 ## Description
 
-A console application to convert Csv to Json or Xml. Currently the console only does a simple parse of the csv. As long as the csv is well formed it can be any length. See roadmap for future updates.
+A console application to convert CSV to JSON or XML. Currently, the console only implements a simple parse of the CSV. As long as the CSV is well-formed it can be of any length. As more data types get added the need to implement a full-blown factory pattern will become more essential. Right now, this strip down version will suffice.
+
+See roadmap for future updates.
 
 It takes three arguments:
 * --i -the input csv file
