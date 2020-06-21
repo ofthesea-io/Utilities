@@ -1,7 +1,8 @@
 
 # File Converter
 
-![ci build](https://github.com/visualsanity/CloudCommerceGroup/workflows/ci%20build/badge.svg) ![.github/workflows/docker-image.yml](https://github.com/visualsanity/Utilities/workflows/.github/workflows/docker-image.yml/badge.svg)
+![ci build](https://github.com/visualsanity/CloudCommerceGroup/workflows/ci%20build/badge.svg) ![ci build](https://github.com/visualsanity/CloudCommerceGroup/workflows/ci%20build/badge.svg)
+
 ## Description
 
 A console application to convert Csv to Json or Xml. 
