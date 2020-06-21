@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  fileconverter:
+    image: ${DOCKER_REGISTRY-}fileconverter
+    build:
+      context: .
+      dockerfile: FileConverter/Dockerfile
+    container_name: FileConverter

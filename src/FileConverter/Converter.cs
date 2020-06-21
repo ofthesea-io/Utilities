@@ -35,7 +35,7 @@
         public async Task Process(string input, string output, char delimiter)
         {
             string[] content = this.ValidateInputFile(input);
-            string extension = this.GetOutputExtension(output);
+            string extension = this.ValidateOutputFile(output);
             string data = string.Empty;
 
             if (!string.IsNullOrEmpty(extension))
@@ -49,6 +49,12 @@
             }
         }
 
+        /// <summary>
+        ///     Save the content to a file
+        /// </summary>
+        /// <param name="output">The output file name</param>
+        /// <param name="content">The content to save</param>
+        /// <returns>Task</returns>
         private async Task Save(string output, string content)
         {
             if(string.IsNullOrEmpty(content))
@@ -60,6 +66,13 @@
             await File.WriteAllTextAsync(output, content, Encoding.UTF8);
         }
 
+        /// <summary>
+        ///    Validation of the input file
+        /// </summary>
+        /// <param name="path">The path to the input file</param>
+        /// <returns>
+        ///     If the file is valid, it reads the content and returns is as a string array
+        /// </returns>
         private string[] ValidateInputFile(string path)
         {
             if (!File.Exists(path))
@@ -74,22 +87,42 @@
             return File.ReadAllLines(path);
         }
 
-        private bool ParseCsv(string input)
+        /// <summary>
+        ///  Validation of the output file
+        /// </summary>
+        /// <param name="path">The path to the output file</param>
+        /// <returns>
+        ///     If the file is valid, it return the extension so that the process function
+        ///     knows what to process
+        /// </returns>
+        private string ValidateOutputFile(string path)
         {
-            return true;
-        }
+            if (string.IsNullOrEmpty(path))
+                throw new FileNotFoundException("File not found. Please enter a file!");
 
-        private string GetOutputExtension(string path)
-        {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException("Incorrect output");
 
-            string result = string.Empty;
+            string result;
             string extension = Path.GetExtension(path);
             if (extension == Converter.JsonExt || extension == Converter.XmlExt)
                 result = extension;
+            else
+                throw new NotSupportedException("Invalid file. Please enter a valid file!");
 
             return result;
+        }
+
+        /// <summary>
+        /// A very simple csv parse function to validate CSV content
+        /// </summary>
+        /// <param name="input">CSV content</param>
+        /// <returns>
+        ///     If the content is valid it return true else it returns false
+        /// </returns>
+        private bool ParseCsv(string input)
+        {
+            return true;
         }
 
         private bool ValidateFileExtension(string path)

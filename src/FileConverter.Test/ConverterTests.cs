@@ -30,7 +30,7 @@
         }
 
         [Test]
-        public void Process_WhenNoFileIsPassed_ThrowsFileNotFoundException()
+        public void Process_WhenNoInputFileIsPassed_ThrowsFileNotFoundException()
         {
             // Arrange
             string input = string.Empty;
@@ -44,7 +44,7 @@
 
 
         [Test]
-        public void Process_WhenNoFileIsPassed_CheckFileNotFoundReturnMessage()
+        public void Process_WhenNoInputFileIsPassed_CheckFileNotFoundReturnMessage()
         {
             // Arrange
             string input = string.Empty;
@@ -58,7 +58,7 @@
         }
 
         [Test]
-        public void Process_WhenFileIsPassedWithIncorrectExtension_ThrowsNotSupportedException()
+        public void Process_WhenInputFileIsPassedWithIncorrectExtension_ThrowsNotSupportedException()
         {
             // Arrange
             string input = "Documents/IncorrectExtension.txt";
@@ -95,6 +95,34 @@
 
             // Assert
             Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+        }
+
+        [Test]
+        public void Process_WhenOutputFileIsPassedWithIncorrectExtension_CheckInvalidExtensionReturnMessage()
+        {
+            // Arrange
+            string input = "Documents/Valid.csv";
+            string output = "test.txt";
+
+            // Act
+
+            // Assert
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
+        }
+
+        [Test]
+        public void Process_WhenOutputFileNotIsPassed_ThrowFileNotFoundException()
+        {
+            // Arrange
+            string input = "Documents/Valid.csv";
+            string output = string.Empty;
+
+            // Act
+
+            // Assert
+            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            Assert.That(result.Message, Is.EqualTo("File not found. Please enter a file!"));
         }
 
         #endregion

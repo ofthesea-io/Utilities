@@ -31,9 +31,16 @@
                 new Option("--d") { Argument = new Argument<char>() }
             };
 
-            command.Handler = CommandHandler.Create(async (string input, string output, char delimiter) => 
+            command.Handler = CommandHandler.Create(async (string i, string o, char d) =>
             {
-                await converter.Process(input, output, delimiter);
+                try
+                {
+                    await converter.Process(i, o, d);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             });
 
             await command.InvokeAsync(args);

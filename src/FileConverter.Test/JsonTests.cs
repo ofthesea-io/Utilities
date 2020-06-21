@@ -20,16 +20,6 @@ namespace FileConverter.Test
         }
 
         [Test]
-        public void ProcessCsvToJson_WhenGivenInValidInputFile_ThrowException()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-        }
-
-        [Test]
         public async Task ProcessCsvToJson_WhenGivenValidInputFile_ReturnJson()
         {
             // Arrange
