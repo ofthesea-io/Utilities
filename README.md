@@ -23,5 +23,14 @@ Three ways to run the application:
 	* Copy the FileConverter.exe to a directory
 	* There is a Sample.csv file to get you started
 	* From the commandline run: FileConverter.exe --i Sample.csv --o output.json --d 	
-3. Run Docker
-	*
+3. Docker. 
+	* Copy the sample csv file from support/sample.csv into a desired directory
+	* Open the command line and run the following commands
+		- docker pull visualsanity/utilities:latest
+		- CD into the directory that you copied the sample.csv
+		- docker run visualsanity/utilities:latest --i Sample.csv --o Output.json
+
+## Roadmap
+
+* Convert json to csv
+* Convert xml to csv
