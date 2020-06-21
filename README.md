@@ -5,7 +5,7 @@
 
 ## Description
 
-A console application to convert Csv to Json or Xml. 
+A console application to convert Csv to Json or Xml. Currently the console only does a simple parse of the csv. As long as the csv is well formed it can be any length. See roadmap for future updates.
 
 It takes three arguments:
 * --i -the input csv file
@@ -22,7 +22,7 @@ Three ways to run the application:
 2. Clone and Build the application.
 	* Copy the FileConverter.exe to a directory
 	* There is a Sample.csv file to get you started
-	* From the commandline run: FileConverter.exe --i Sample.csv --o output.json --d 	
+	* From the commandline run: FileConverter.exe --i Sample.csv --o output.json --d ,	
 3. Docker. 
 	* Copy the sample csv file from support/sample.csv into a desired directory
 	* Open the command line and run the following commands
@@ -31,6 +31,6 @@ Three ways to run the application:
 		- docker run visualsanity/utilities:latest --i Sample.csv --o Output.json
 
 ## Roadmap
-
+* Update parse function
 * Convert json to csv
 * Convert xml to csv
