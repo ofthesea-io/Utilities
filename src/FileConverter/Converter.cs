@@ -32,6 +32,13 @@
 
         #region Methods
 
+        /// <summary>
+        ///     Currently processes the csv into json or xml. It would be easy to swap this out into
+        ///     full blown factory pattern as a abstract base class has already been implemented.
+        /// </summary>
+        /// <param name="input">The input file</param>
+        /// <param name="output">The output file</param>
+        /// <returns>Task or exception</returns>
         public async Task Process(string input, string output)
         {
             string[] content = this.ValidateInputFile(input);
