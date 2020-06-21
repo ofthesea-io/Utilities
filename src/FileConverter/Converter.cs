@@ -36,6 +36,7 @@
         {
             string[] content = this.ValidateInputFile(input);
             string extension = this.ValidateOutputFile(output);
+            ParseCsv(ref content);
             string data = string.Empty;
 
             if (!string.IsNullOrEmpty(extension))
@@ -116,13 +117,22 @@
         /// <summary>
         /// A very simple csv parse function to validate CSV content
         /// </summary>
-        /// <param name="input">CSV content</param>
+        /// <param name="content">CSV content</param>
         /// <returns>
         ///     If the content is valid it return true else it returns false
         /// </returns>
-        private bool ParseCsv(string input)
+        private void ParseCsv(ref string[] content)
         {
-            return true;
+            if (content.Length == 0)
+                throw new NullReferenceException("CSV file is empty");
+
+            int columns = content[0].Split(this.Delimiter).Length;
+            for (int i = 1; i <= content.Length; i++)
+            {
+               int j = content[i].Split(this.Delimiter).Length;
+               if (j != columns)
+                   throw new InvalidDataException("CSV data validation failed!");
+            }
         }
 
         private bool ValidateFileExtension(string path)

@@ -125,6 +125,20 @@
             Assert.That(result.Message, Is.EqualTo("File not found. Please enter a file!"));
         }
 
+        [Test]
+        public void Process_WhenOutputFileNotIsPassed_ShouldThrowInvalidDataException()
+        {
+            // Arrange
+            string input = "Documents/InValid.csv";
+            string output = "output.json";
+
+            // Act
+
+            // Assert
+            InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() => this.converter.Process(input, output, JConverterTests.Delimiter));
+            Assert.That(result.Message, Is.EqualTo("CSV data validation failed!"));
+        }
+
         #endregion
     }
 }
