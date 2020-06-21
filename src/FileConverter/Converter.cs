@@ -33,8 +33,7 @@
         #region Methods
 
         /// <summary>
-        ///     Currently processes the csv into json or xml. It would be easy to swap this out into
-        ///     full blown factory pattern as a abstract base class has already been implemented.
+        ///     Currently processes the csv into json or xml. 
         /// </summary>
         /// <param name="input">The input file</param>
         /// <param name="output">The output file</param>
