@@ -2,7 +2,10 @@
   "profiles": {
     "FileConverter": {
       "commandName": "Project",
-      "commandLineArgs": "--i Sample.csv --o output.json"
+      "commandLineArgs": "--i Sample.csv --o output.xml"
+    },
+    "Docker": {
+      "commandName": "Docker"
     }
   }
 }

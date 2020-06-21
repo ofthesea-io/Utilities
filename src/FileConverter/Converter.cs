@@ -46,10 +46,15 @@
 
             if (!string.IsNullOrEmpty(extension))
             {
-                if (extension == Converter.JsonExt)
-                 data = await this.jsonService.ProcessCsvToJson(content);
-                if (extension == Converter.XmlExt)
-                 data = await this.xmlService.ProcessCsvToXml(content);
+                switch (extension)
+                {
+                    case JsonExt:
+                        data = await this.jsonService.ProcessCsvToJson(content);
+                        break;
+                    case XmlExt:
+                        data = await this.xmlService.ProcessCsvToXml(content);
+                        break;
+                }
 
                 await this.Save(output, data);
             }
@@ -112,6 +117,11 @@
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException("Incorrect output");
 
+            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+            }
+
             string result;
             string extension = Path.GetExtension(path);
             if (extension == Converter.JsonExt || extension == Converter.XmlExt)
@@ -151,11 +161,11 @@
             string extension = Path.GetExtension(path);
             switch (extension.ToLower())
             {
-                case Converter.CsvExt:
+                case CsvExt:
                     return true;
-                case Converter.XmlExt:
+                case XmlExt:
                     return true;
-                case Converter.JsonExt:
+                case JsonExt:
                     return true;
                 default:
                     return false;

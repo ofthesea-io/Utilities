@@ -17,8 +17,8 @@ It takes three arguments:
 Three ways to run the application:
 
 1. Clone the repository, and run the solution (FileConverter.sln)
-	* Set the properties application arguments:
-		--i Sample.csv --o output.json --d ,
+	* Set the launchSettings.json arguments:
+		--i Sample.csv --o output/output.json --d ,
 2. Clone and Build the application.
 	* Copy the FileConverter.exe to a directory
 	* There is a Sample.csv file to get you started
