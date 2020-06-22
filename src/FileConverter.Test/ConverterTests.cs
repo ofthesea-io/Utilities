@@ -112,6 +112,21 @@
         }
 
         [Test]
+        public void Process_WhenInvalidOutputFileExtensionIsPassed_ThrowFileNotFoundException()
+        {
+            // Arrange
+            string input = "Documents/Valid.csv";
+            string output = "output.jpg";
+
+            // Act
+
+            // Assert
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this.converter.Process(input, output));
+            Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
+        }
+
+
+        [Test]
         public void Process_WhenOutputFileNotIsPassed_ThrowFileNotFoundException()
         {
             // Arrange

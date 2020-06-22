@@ -15,8 +15,8 @@
         private const string JsonExt = ".json";
         private const string XmlExt = ".xml";
         private const string CsvExt = ".csv";
-        private readonly IJsonService jsonService;
-        private readonly IXmlService xmlService;
+        private readonly IJsonService _jsonService;
+        private readonly IXmlService _xmlService;
 
         #endregion
 
@@ -24,8 +24,8 @@
 
         public Converter(IXmlService xmlService, IJsonService jsonService)
         {
-            this.xmlService = xmlService;
-            this.jsonService = jsonService;
+            this._xmlService = xmlService;
+            this._jsonService = jsonService;
         }
             
         #endregion
@@ -40,8 +40,8 @@
         /// <returns>Task or exception</returns>
         public async Task Process(string input, string output)
         {
-            string[] content = this.ValidateInputFile(input);
             string extension = this.ValidateOutputFile(output);
+            string[] content = this.ValidateInputFile(input);
             string data = string.Empty;
 
             if (!string.IsNullOrEmpty(extension))
@@ -49,10 +49,10 @@
                 switch (extension)
                 {
                     case JsonExt:
-                        data = await this.jsonService.ProcessCsvToJson(content);
+                        data = await this._jsonService.ProcessCsvToJson(content);
                         break;
                     case XmlExt:
-                        data = await this.xmlService.ProcessCsvToXml(content);
+                        data = await this._xmlService.ProcessCsvToXml(content);
                         break;
                 }
 
@@ -96,6 +96,7 @@
                 throw new ArgumentException("No data found in file!");
 
             var data = File.ReadAllLines(path);
+
             this.ParseCsv(ref data);
 
             return data;
@@ -122,14 +123,11 @@
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
             }
 
-            string result;
             string extension = Path.GetExtension(path);
-            if (extension == Converter.JsonExt || extension == Converter.XmlExt)
-                result = extension;
-            else
+            if (extension != Converter.JsonExt && extension != Converter.XmlExt)
                 throw new NotSupportedException("Invalid file. Please enter a valid file!");
-
-            return result;
+            
+            return extension;
         }
 
         /// <summary>
