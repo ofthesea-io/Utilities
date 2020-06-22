@@ -1,15 +1,18 @@
-﻿namespace FileConverter.Test
+﻿namespace FileConverter.Xml.Test
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using NUnit.Framework;
-    using Xml;
 
     public class XmlTests
     {
+        #region Fields
+
         private IXmlService xmlService;
+
+        #endregion
 
         #region Methods
 
@@ -29,7 +32,7 @@
             // Act and Assert
             try
             {
-                var xml = await this.xmlService.ProcessCsvToXml(content);
+                string xml = await this.xmlService.ProcessCsvToXml(content);
                 XDocument xDocument = XDocument.Parse(xml);
                 Assert.NotNull(xDocument);
             }

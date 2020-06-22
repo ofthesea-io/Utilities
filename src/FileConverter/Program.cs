@@ -4,39 +4,27 @@
     using System.CommandLine;
     using System.CommandLine.Invocation;
     using System.Threading.Tasks;
-    using Json;
-    using Microsoft.Extensions.DependencyInjection;
-    using Xml;
 
     public class Program
     {
-        #region Fields
-
-        private static IServiceProvider _serviceProvider;
-
-        #endregion
-
         #region Methods
 
         private static async Task Main(string[] args)
         {
-            Program.RegisterServices();
-
-            var converter = _serviceProvider.GetService<IConverter>();
-
-            var command = new RootCommand
+            RootCommand command = new RootCommand
             {
-                new Option("--i", "Input file") { Argument = new Argument<string>() },
-                new Option("--o", "Output file") { Argument = new Argument<string>() },
-                new Option("--d", "Delimiter") { Argument = new Argument<char>() }
+                new Option("--i", "Input file") {Argument = new Argument<string>()},
+                new Option("--o", "Output file") {Argument = new Argument<string>()},
+                new Option("--d", "Delimiter") {Argument = new Argument<char>()}
             };
 
             command.Handler = CommandHandler.Create(async (string i, string o, char d) =>
             {
                 try
                 {
+                    Converter converter = new Converter();
                     if (d != '\0')
-                        converter.Delimiter = (char)d;
+                        converter.Delimiter = d;
 
                     await converter.Process(i, o);
                 }
@@ -47,26 +35,6 @@
             });
 
             await command.InvokeAsync(args);
-
-            Program.DisposeServices();
-        }
-
-        private static void RegisterServices()
-        {
-            var services = new ServiceCollection();
-            services.AddSingleton<IXmlService, XmlService>();
-            services.AddSingleton<IJsonService, JsonService>();
-            services.AddSingleton<IConverter, Converter>();
-            Program._serviceProvider = services.BuildServiceProvider(true);
-        }
-
-        private static void DisposeServices()
-        {
-            if (Program._serviceProvider == null)
-                return;
-
-            if (Program._serviceProvider is IDisposable)
-                ((IDisposable)Program._serviceProvider).Dispose();
         }
 
         #endregion

@@ -1,22 +1,25 @@
-namespace FileConverter.Test
+namespace FileConverter.Json.Test
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Json;
     using Newtonsoft.Json.Linq;
     using NUnit.Framework;
 
     public class JsonTests
     {
-        private IJsonService jsonService;
+        #region Fields
+
+        private JsonService _jsonService;
+
+        #endregion
 
         #region Methods
 
         [SetUp]
         public void Setup()
         {
-            this.jsonService = new JsonService();
+            this._jsonService = new JsonService();
         }
 
         [Test]
@@ -29,7 +32,7 @@ namespace FileConverter.Test
             // Act and Assert
             try
             {
-                var json = await this.jsonService.ProcessCsvToJson(content);
+                var json = await this._jsonService.ProcessCsvToJson(content);
                 JToken token = JToken.Parse(json);
                 Assert.NotNull(token);
             }

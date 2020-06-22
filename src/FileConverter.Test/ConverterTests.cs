@@ -10,11 +10,11 @@
     {
         #region Fields
 
+        private const char Delimiter = ',';
+
         private IConverter converter;
         private JsonService jsonService;
         private XmlService xmlService;
-
-        private const char Delimiter = ',';
 
         #endregion
 
@@ -26,7 +26,7 @@
             this.xmlService = new XmlService();
             this.jsonService = new JsonService();
 
-            this.converter = new Converter(this.xmlService, this.jsonService);
+            this.converter = new Converter();
         }
 
         [Test]

@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FileConverter.Json\FileConverter.Json.csproj" />
+    <ProjectReference Include="..\FileConverter.Xml\FileConverter.Xml.csproj" />
     <ProjectReference Include="..\FileConverter\FileConverter.csproj" />
   </ItemGroup>
 

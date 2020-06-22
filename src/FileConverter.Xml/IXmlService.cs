@@ -4,8 +4,12 @@
 
     public interface IXmlService
     {
+        #region Methods
+
         Task<string> ProcessCsvToXml(string[] content);
 
         Task<string> ProcessXmlToCsv(string input);
+
+        #endregion
     }
 }

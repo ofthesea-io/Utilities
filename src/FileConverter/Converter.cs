@@ -5,8 +5,6 @@
     using System.Text;
     using System.Threading.Tasks;
     using Core;
-    using Json;
-    using Xml;
 
     public class Converter : BaseService, IConverter
     {
@@ -15,25 +13,22 @@
         private const string JsonExt = ".json";
         private const string XmlExt = ".xml";
         private const string CsvExt = ".csv";
-        private readonly IJsonService _jsonService;
-        private readonly IXmlService _xmlService;
 
         #endregion
 
         #region Constructors
 
-        public Converter(IXmlService xmlService, IJsonService jsonService)
+        public Converter()
         {
-            this._xmlService = xmlService;
-            this._jsonService = jsonService;
+            this.RegisterServices();
         }
-            
+
         #endregion
 
         #region Methods
 
         /// <summary>
-        ///     Currently processes the csv into json or xml. 
+        ///     Currently processes the csv into json or xml.
         /// </summary>
         /// <param name="input">The input file</param>
         /// <param name="output">The output file</param>
@@ -48,12 +43,12 @@
             {
                 switch (extension)
                 {
-                    case JsonExt:
-                        data = await this._jsonService.ProcessCsvToJson(content);
-                        break;
-                    case XmlExt:
-                        data = await this._xmlService.ProcessCsvToXml(content);
-                        break;
+                    //case Converter.JsonExt:
+                    //    data = await this._jsonService.ProcessCsvToJson(content);
+                    //    break;
+                    //case Converter.XmlExt:
+                    //    data = await this._xmlService.ProcessCsvToXml(content);
+                    //    break;
                 }
 
                 await this.Save(output, data);
@@ -68,17 +63,17 @@
         /// <returns>Task</returns>
         private async Task Save(string output, string content)
         {
-            if(string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(content))
                 throw new ArgumentException("No content to save!");
 
-            if(File.Exists(output))
+            if (File.Exists(output))
                 File.Delete(output);
 
             await File.WriteAllTextAsync(output, content, Encoding.UTF8);
         }
 
         /// <summary>
-        ///    Validation of the input file
+        ///     Validation of the input file
         /// </summary>
         /// <param name="path">The path to the input file</param>
         /// <returns>
@@ -95,7 +90,7 @@
             if (File.ReadAllText(path).Length == 0)
                 throw new ArgumentException("No data found in file!");
 
-            var data = File.ReadAllLines(path);
+            string[] data = File.ReadAllLines(path);
 
             this.ParseCsv(ref data);
 
@@ -103,7 +98,7 @@
         }
 
         /// <summary>
-        ///  Validation of the output file
+        ///     Validation of the output file
         /// </summary>
         /// <param name="path">The path to the output file</param>
         /// <returns>
@@ -118,20 +113,17 @@
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException("Incorrect output");
 
-            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
-            }
+            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar)) Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             string extension = Path.GetExtension(path);
             if (extension != Converter.JsonExt && extension != Converter.XmlExt)
                 throw new NotSupportedException("Invalid file. Please enter a valid file!");
-            
+
             return extension;
         }
 
         /// <summary>
-        /// A very simple csv parse function to validate CSV content
+        ///     A very simple csv parse function to validate CSV content
         /// </summary>
         /// <param name="content">CSV content</param>
         /// <returns>
@@ -148,9 +140,9 @@
 
             for (int i = 1; i < content.Length; i++)
             {
-               int j = content[i].Split(this.Delimiter).Length;
-               if (j != columns)
-                   throw new InvalidDataException("CSV data validation failed!");
+                int j = content[i].Split(this.Delimiter).Length;
+                if (j != columns)
+                    throw new InvalidDataException("CSV data validation failed!");
             }
         }
 
@@ -159,11 +151,11 @@
             string extension = Path.GetExtension(path);
             switch (extension.ToLower())
             {
-                case CsvExt:
+                case Converter.CsvExt:
                     return true;
-                case XmlExt:
+                case Converter.XmlExt:
                     return true;
-                case JsonExt:
+                case Converter.JsonExt:
                     return true;
                 default:
                     return false;
