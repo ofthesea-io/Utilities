@@ -26,7 +26,7 @@
                     if (d != '\0')
                         converter.Delimiter = d;
 
-                    await converter.Write(i, o);
+                    await converter.Process(i, o);
                 }
                 catch (Exception e)
                 {

@@ -11,13 +11,9 @@
 
     public class Converter : BaseService
     {
-        #region Fields
+        private string _outputExtension;
 
-        private const string JsonExt = ".json";
-        private const string XmlExt = ".xml";
-        private const string CsvExt = ".csv";
-
-        #endregion
+        private string _inputExtension;
 
         #region Constructors
 
@@ -36,27 +32,29 @@
         /// <param name="input">The input file</param>
         /// <param name="output">The output file</param>
         /// <returns>Task or exception</returns>
-        public async Task Write(string input, string output)
+        public async Task Process(string input, string output)
         {
-            string extension = this.ValidateOutputFile(output);
-            string[] content = this.ValidateInputFile(input);
-            string data = string.Empty;
+            this.ValidateOutputFile(output);
+            this.ValidateInputFile(input);
 
-            if (!string.IsNullOrEmpty(extension))
+            this._outputExtension = this.GetFileExtension(output);
+            this._inputExtension = this.GetFileExtension(input);
+
+            string conversionType = $"{this._inputExtension}to{this._outputExtension}";
+
+            if (!string.IsNullOrEmpty(conversionType))
             {
-                IEnumerable<IProcessor> temp = this.Composition.GetExports<IProcessor>();
+                IEnumerable<IProcessor> processors = this.Composition.GetExports<IProcessor>();
 
-                switch (extension)
+                var data = await File.ReadAllLinesAsync(input);
+
+                var processor = processors.FirstOrDefault(q => q.ConversionType.ToLower() == conversionType.ToLower());
+
+                if (processor != null)
                 {
-                    //case Converter.JsonExt:
-                    //    data = await this._jsonService.ProcessCsvToJson(content);
-                    //    break;
-                    //case Converter.XmlExt:
-                    //    data = await this._xmlService.ProcessCsvToXml(content);
-                    //    break;
+                    var result = await processor.Execute(data);
+                    await this.Save(output, result);
                 }
-
-                await this.Save(output, data);
             }
         }
 
@@ -84,33 +82,20 @@
         /// <returns>
         ///     If the file is valid, it reads the content and returns is as a string array
         /// </returns>
-        private string[] ValidateInputFile(string path)
+        private void ValidateInputFile(string path)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException("Input file not found. Please enter a file!");
 
-            if (!this.ValidateFileExtension(path))
-                throw new NotSupportedException("Invalid input file. Please enter a valid file!");
-
             if (File.ReadAllText(path).Length == 0)
                 throw new ArgumentException("No data found in file!");
-
-            string[] data = File.ReadAllLines(path);
-
-            this.ParseCsv(ref data);
-
-            return data;
         }
 
         /// <summary>
         ///     Validation of the output file
         /// </summary>
         /// <param name="path">The path to the output file</param>
-        /// <returns>
-        ///     If the file is valid, it return the extension so that the process function
-        ///     knows what to process
-        /// </returns>
-        private string ValidateOutputFile(string path)
+        private void ValidateOutputFile(string path)
         {
             if (string.IsNullOrEmpty(path))
                 throw new FileNotFoundException("Output file not found. Please enter a file!");
@@ -118,22 +103,14 @@
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentException("Incorrect output");
 
-            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar)) Directory.CreateDirectory(Path.GetDirectoryName(path));
-
-            string extension = Path.GetExtension(path);
-            if (extension != Converter.JsonExt && extension != Converter.XmlExt)
-                throw new NotSupportedException("Invalid file. Please enter a valid file!");
-
-            return extension;
+            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar)) 
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
         }
 
         /// <summary>
         ///     A very simple csv parse function to validate CSV content
         /// </summary>
         /// <param name="content">CSV content</param>
-        /// <returns>
-        ///     If the content is valid it return true else it returns false
-        /// </returns>
         private void ParseCsv(ref string[] content)
         {
             if (content.Length == 0)
@@ -151,20 +128,21 @@
             }
         }
 
-        private bool ValidateFileExtension(string path)
+        /// <summary>
+        ///     Determines the extension of the file
+        /// </summary>
+        /// <param name="path">The path to the document</param>
+        /// <returns>The extension</returns>
+        private string GetFileExtension(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                throw new FileNotFoundException("File not found!");
+
             string extension = Path.GetExtension(path);
-            switch (extension.ToLower())
-            {
-                case Converter.CsvExt:
-                    return true;
-                case Converter.XmlExt:
-                    return true;
-                case Converter.JsonExt:
-                    return true;
-                default:
-                    return false;
-            }
+            if (string.IsNullOrEmpty(extension)) 
+                throw new ArgumentException("No extension found!");
+
+            return extension.Substring(1, extension.Length - 1);
         }
 
         #endregion

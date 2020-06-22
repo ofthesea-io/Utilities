@@ -3,10 +3,12 @@
     using System.Threading.Tasks;
 
     public interface IProcessor
-    {
+    { 
+        string ConversionType { get; }
+
         #region Methods
 
-        Task<string> Process(string[] content);
+        Task<string> Execute(string[] content);
 
         #endregion
     }

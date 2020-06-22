@@ -23,7 +23,7 @@
         }
 
         [Test]
-        public async Task ProcessCsvToXml_WhenGivenValidInputFile_ReturnJson()
+        public async Task Execute_WhenGivenValidInputFile_ReturnJson()
         {
             // Arrange
             string input = "Documents/Valid.csv";
@@ -32,7 +32,7 @@
             // Act and Assert
             try
             {
-                string xml = await this._csvToXmlService.Process(content);
+                string xml = await this._csvToXmlService.Execute(content);
                 XDocument xDocument = XDocument.Parse(xml);
                 Assert.NotNull(xDocument);
             }

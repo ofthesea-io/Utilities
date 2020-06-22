@@ -13,12 +13,14 @@
     {
         #region Methods
 
+        public string ConversionType { get; } = "CsvToXml";
+
         /// <summary>
         ///     Converts the csv file into xml
         /// </summary>
         /// <param name="content">csv content</param>
         /// <returns>formatted xml string</returns>
-        public async Task<string> Process(string[] content)
+        public async Task<string> Execute(string[] content)
         {
             return await Task.Run(() =>
             {

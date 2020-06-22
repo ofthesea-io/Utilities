@@ -23,7 +23,7 @@ namespace FileConverter.Json.Test
         }
 
         [Test]
-        public async Task ProcessCsvToJson_WhenGivenValidInputFile_ReturnJson()
+        public async Task Execute_WhenGivenValidInputFile_ReturnJson()
         {
             // Arrange
             string input = "Documents/Valid.csv";
@@ -32,7 +32,7 @@ namespace FileConverter.Json.Test
             // Act and Assert
             try
             {
-                var json = await this._csvToJsonService.Process(content);
+                var json = await this._csvToJsonService.Execute(content);
                 JToken token = JToken.Parse(json);
                 Assert.NotNull(token);
             }

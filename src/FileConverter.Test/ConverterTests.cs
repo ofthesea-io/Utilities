@@ -35,7 +35,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Write(input, output));
+            Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Process(input, output));
         }
 
 
@@ -49,7 +49,7 @@
             // Act
 
             // Assert
-            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Write(input, output));
+            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("Input file not found. Please enter a file!"));
         }
 
@@ -63,7 +63,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Write(input, output));
+            Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
         }
 
         [Test]
@@ -76,7 +76,7 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Write(input, output));
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("Invalid input file. Please enter a valid file!"));
         }
 
@@ -90,7 +90,7 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Write(input, output));
+            Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Process(input, output));
         }
 
         [Test]
@@ -103,7 +103,7 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Write(input, output));
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
         }
 
@@ -117,7 +117,7 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Write(input, output));
+            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
         }
 
@@ -132,7 +132,7 @@
             // Act
 
             // Assert
-            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Write(input, output));
+            FileNotFoundException result = Assert.ThrowsAsync<FileNotFoundException>(() => this._converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("Output file not found. Please enter a file!"));
         }
 
@@ -146,7 +146,7 @@
             // Act
 
             // Assert
-            InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() => this._converter.Write(input, output));
+            InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() => this._converter.Process(input, output));
             Assert.That(result.Message, Is.EqualTo("CSV data validation failed!"));
         }
 
@@ -163,7 +163,7 @@
             InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() =>
             {
                 this._converter.Delimiter = delimiter;
-                return this._converter.Write(input, output);
+                return this._converter.Process(input, output);
             });
             Assert.That(result.Message, Is.EqualTo("Invalid delimiter!"));
         }
