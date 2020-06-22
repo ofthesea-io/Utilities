@@ -1,12 +1,15 @@
 ﻿namespace FileConverter
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using Core;
 
-    public class Converter : BaseService, IConverter
+    public class Converter : BaseService
     {
         #region Fields
 
@@ -33,7 +36,7 @@
         /// <param name="input">The input file</param>
         /// <param name="output">The output file</param>
         /// <returns>Task or exception</returns>
-        public async Task Process(string input, string output)
+        public async Task Write(string input, string output)
         {
             string extension = this.ValidateOutputFile(output);
             string[] content = this.ValidateInputFile(input);
@@ -41,6 +44,8 @@
 
             if (!string.IsNullOrEmpty(extension))
             {
+                IEnumerable<IProcessor> temp = this.Composition.GetExports<IProcessor>();
+
                 switch (extension)
                 {
                     //case Converter.JsonExt:

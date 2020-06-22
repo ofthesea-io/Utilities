@@ -10,7 +10,7 @@
     {
         #region Fields
 
-        private IXmlService xmlService;
+        private CsvToXmlService _csvToXmlService;
 
         #endregion
 
@@ -19,7 +19,7 @@
         [SetUp]
         public void Setup()
         {
-            this.xmlService = new XmlService();
+            this._csvToXmlService = new CsvToXmlService();
         }
 
         [Test]
@@ -32,7 +32,7 @@
             // Act and Assert
             try
             {
-                string xml = await this.xmlService.ProcessCsvToXml(content);
+                string xml = await this._csvToXmlService.Process(content);
                 XDocument xDocument = XDocument.Parse(xml);
                 Assert.NotNull(xDocument);
             }

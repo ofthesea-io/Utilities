@@ -10,7 +10,7 @@ namespace FileConverter.Json.Test
     {
         #region Fields
 
-        private JsonService _jsonService;
+        private CsvToJsonService _csvToJsonService;
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace FileConverter.Json.Test
         [SetUp]
         public void Setup()
         {
-            this._jsonService = new JsonService();
+            this._csvToJsonService = new CsvToJsonService();
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace FileConverter.Json.Test
             // Act and Assert
             try
             {
-                var json = await this._jsonService.ProcessCsvToJson(content);
+                var json = await this._csvToJsonService.Process(content);
                 JToken token = JToken.Parse(json);
                 Assert.NotNull(token);
             }

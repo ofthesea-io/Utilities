@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FileConverter.Core\FileConverter.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Sample.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
