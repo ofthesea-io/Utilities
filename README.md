@@ -5,7 +5,9 @@
 
 ## Description
 
-A console application to convert Csv to Json or Xml. Currently the console only does a simple parse of the csv. As long as the csv is well formed it can be any length. See roadmap for future updates.
+A console application to convert CSV to JSON or XML. Currently, the console only implements a simple parse of the CSV. As long as the CSV is well-formed it can be of any length. As more data types get added the need to implement a full-blown factory like pattern with composition framework will become more essential. Right now, this stripped down version will suffice.
+
+See roadmap for future updates.
 
 It takes three arguments:
 * --i -the input csv file
@@ -31,6 +33,7 @@ Three ways to run the application:
 		- docker run visualsanity/utilities:latest --i Sample.csv --o Output.json
 
 ## Roadmap
+* Implement a Composition framework
 * Update parse function
 * Convert json to csv
 * Convert xml to csv
