@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using Json;
+    using Moq;
     using NUnit.Framework;
     using Xml;
 
@@ -14,6 +15,7 @@
 
         private Converter _converter;
 
+        private Mock<IConfiguration> _moqConfiguration;
 
         #endregion
 
@@ -22,7 +24,8 @@
         [SetUp]
         public void Setup()
         {
-            this._converter = new Converter();
+            this._moqConfiguration = new Mock<IConfiguration>();
+            this._converter = new Converter(this._moqConfiguration.Object);
         }
 
         [Test]

@@ -9,17 +9,20 @@
     using System.Threading.Tasks;
     using Core;
 
-    public class Converter : BaseService
+    public class Converter : BaseService, IConverter
     {
         private string _outputExtension;
 
         private string _inputExtension;
 
+        private readonly IConfiguration _confguration;
+
         #region Constructors
 
-        public Converter()
+        public Converter(IConfiguration configuration)
         {
-            this.RegisterServices();
+            this._confguration = configuration;
+            this.RegisterServices(this._confguration.GetPluginDirectory());
         }
 
         #endregion
@@ -53,7 +56,7 @@
                 if (processor != null)
                 {
                     if (this.MetaData != null) 
-                        processor.MetaData = MetaData;
+                        processor.MetaData = this.MetaData;
 
                     var result = await processor.Execute(data);
                     await this.Save(output, result);

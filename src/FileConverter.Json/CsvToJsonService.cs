@@ -29,8 +29,8 @@
                 string[] keys = content[0].Split((char)this.MetaData);
                 IEnumerable<Dictionary<string, string>> rawObject = content.Skip(1)
                     .Select(q => q.Split((char)this.MetaData)
-                   .Select((x, y) => new {Key = keys[y].Trim(), Value = x})
-                   .ToDictionary(_ => _.Key, _ => _.Value));
+                    .Select((x, y) => new {Key = keys[y].Trim(), Value = x})
+                    .ToDictionary(_ => _.Key, _ => _.Value));
 
                 string json = JsonConvert.SerializeObject(rawObject, Formatting.Indented);
 

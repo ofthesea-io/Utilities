@@ -25,13 +25,12 @@
 
         #region Methods
 
-        protected void RegisterServices()
+        protected void RegisterServices(string pluginDirectory)
         {
             this._containerConfiguration = new ContainerConfiguration();
-            string path = "C:\\Build\\Plugins\\netcoreapp3.1\\";
 
             IEnumerable<Assembly> assemblies = Directory
-                .GetFiles(path, "*.dll", SearchOption.TopDirectoryOnly)
+                .GetFiles(pluginDirectory, "*.dll", SearchOption.TopDirectoryOnly)
                 .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath);
 
             this._containerConfiguration.WithAssemblies(assemblies);

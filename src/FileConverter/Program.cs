@@ -4,13 +4,18 @@
     using System.CommandLine;
     using System.CommandLine.Invocation;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class Program
     {
+        private static IServiceProvider _serviceProvider;
+
         #region Methods
 
         private static async Task Main(string[] args)
         {
+            RegisterServices();
+
             RootCommand command = new RootCommand
             {
                 new Option("--i", "Input file") { Argument = new Argument<string>()},
@@ -22,7 +27,7 @@
             {
                 try
                 {
-                    Converter converter = new Converter();
+                    IConverter converter = _serviceProvider.GetService<IConverter>();
                     if (m != '\0')
                         converter.MetaData = m;
 
@@ -35,6 +40,25 @@
             });
 
             await command.InvokeAsync(args);
+
+            Dispose();
+        }
+
+        private static void RegisterServices()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<IConverter, Converter>();
+            services.AddSingleton<IConfiguration, Configuration>();
+            _serviceProvider = services.BuildServiceProvider(true);
+        }
+
+        private static void Dispose()
+        {
+            if (_serviceProvider == null)
+                return;
+
+            if (_serviceProvider is IDisposable)
+                ((IDisposable)_serviceProvider).Dispose();
         }
 
         #endregion
