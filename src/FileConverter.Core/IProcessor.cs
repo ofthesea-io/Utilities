@@ -3,7 +3,9 @@
     using System.Threading.Tasks;
 
     public interface IProcessor
-    { 
+    {
+        public object MetaData { get; set; }
+
         string ConversionType { get; }
 
         #region Methods

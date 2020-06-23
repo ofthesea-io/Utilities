@@ -28,10 +28,12 @@
             // Arrange
             string input = "Documents/Valid.csv";
             string[] content = await File.ReadAllLinesAsync(input);
+            char metaData = ',';
 
             // Act and Assert
             try
             {
+                this._csvToXmlService.MetaData = metaData;
                 string xml = await this._csvToXmlService.Execute(content);
                 XDocument xDocument = XDocument.Parse(xml);
                 Assert.NotNull(xDocument);

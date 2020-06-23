@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        char Delimiter { get; set; }
+        object MetaData { get; set; }
 
         #endregion
 

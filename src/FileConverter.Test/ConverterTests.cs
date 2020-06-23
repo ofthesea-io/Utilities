@@ -54,7 +54,7 @@
         }
 
         [Test]
-        public void Process_WhenInputFileIsPassedWithIncorrectExtension_ThrowsNotSupportedException()
+        public void Process_WhenInputFileIsPassedWithIncorrectExtension_ThrowsArgumentException()
         {
             // Arrange
             string input = "Documents/IncorrectExtension.txt";
@@ -63,11 +63,11 @@
             // Act
 
             // Assert
-            Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
+            Assert.ThrowsAsync<ArgumentException>(() => this._converter.Process(input, output));
         }
 
         [Test]
-        public void Process_WhenFileIsPassedWithIncorrectExtension_CheckInvalidExtensionReturnMessage()
+        public void Process_WhenFileIsPassedWithIncorrectExtension_ThrowArgumentException()
         {
             // Arrange
             string input = "Documents/IncorrectExtension.txt";
@@ -76,12 +76,12 @@
             // Act
 
             // Assert
-            NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
-            Assert.That(result.Message, Is.EqualTo("Invalid input file. Please enter a valid file!"));
+            ArgumentException result = Assert.ThrowsAsync<ArgumentException>(() => this._converter.Process(input, output));
+            Assert.That(result.Message, Is.EqualTo("No content found in file!"));
         }
 
         [Test]
-        public void Process_WhenGivenEmptyOutputPath_ThrowArgumentException()
+        public void Process_WhenGivenEmptyOutputPath_ThrowFileNotFoundException()
         {
             // Arrange
             string input = string.Empty;
@@ -104,7 +104,7 @@
 
             // Assert
             NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
-            Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
+            Assert.That(result.Message, Is.EqualTo("Conversion process not found!"));
         }
 
         [Test]
@@ -118,7 +118,7 @@
 
             // Assert
             NotSupportedException result = Assert.ThrowsAsync<NotSupportedException>(() => this._converter.Process(input, output));
-            Assert.That(result.Message, Is.EqualTo("Invalid file. Please enter a valid file!"));
+            Assert.That(result.Message, Is.EqualTo("Conversion process not found!"));
         }
 
 
@@ -137,7 +137,7 @@
         }
 
         [Test]
-        public void Process_WhenOutputFileNotIsPassed_ShouldThrowInvalidDataException()
+        public void Process_WhenInvalidCsvIsPassed_ShouldThrowInvalidDataException()
         {
             // Arrange
             string input = "Documents/InValid.csv";
@@ -162,7 +162,7 @@
             // Assert
             InvalidDataException result = Assert.ThrowsAsync<InvalidDataException>(() =>
             {
-                this._converter.Delimiter = delimiter;
+                this._converter.MetaData = delimiter;
                 return this._converter.Process(input, output);
             });
             Assert.That(result.Message, Is.EqualTo("Invalid delimiter!"));

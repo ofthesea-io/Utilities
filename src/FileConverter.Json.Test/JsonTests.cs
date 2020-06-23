@@ -28,10 +28,12 @@ namespace FileConverter.Json.Test
             // Arrange
             string input = "Documents/Valid.csv";
             string[] content = await File.ReadAllLinesAsync(input);
+            char metaData = ',';
 
             // Act and Assert
             try
             {
+                this._csvToJsonService.MetaData = metaData;
                 var json = await this._csvToJsonService.Execute(content);
                 JToken token = JToken.Parse(json);
                 Assert.NotNull(token);

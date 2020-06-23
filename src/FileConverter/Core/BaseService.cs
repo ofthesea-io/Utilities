@@ -19,7 +19,7 @@
 
         public CompositionHost Composition { get; set; }
 
-        public virtual char Delimiter { get; set; } = ',';
+        public virtual object MetaData { get; set; } = ',';
 
         #endregion
 

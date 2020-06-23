@@ -12,6 +12,8 @@
     {
         #region Methods
 
+        public object MetaData { get; set; }
+
         public string ConversionType { get; } = "CsvToJson";
 
         /// <summary>
@@ -21,12 +23,14 @@
         /// <returns>formatted json string</returns>
         public async Task<string> Execute(string[] content)
         {
+            ParseCsv(ref content, (char)this.MetaData);
             return await Task.Run(() =>
             {
-                string[] keys = content[0].Split(base.Delimiter);
-                IEnumerable<Dictionary<string, string>> rawObject = content.Skip(1).Select(q => q.Split(base.Delimiter)
-                                               .Select((x, y) => new {Key = keys[y].Trim(), Value = x})
-                                               .ToDictionary(_ => _.Key, _ => _.Value));
+                string[] keys = content[0].Split((char)this.MetaData);
+                IEnumerable<Dictionary<string, string>> rawObject = content.Skip(1)
+                    .Select(q => q.Split((char)this.MetaData)
+                   .Select((x, y) => new {Key = keys[y].Trim(), Value = x})
+                   .ToDictionary(_ => _.Key, _ => _.Value));
 
                 string json = JsonConvert.SerializeObject(rawObject, Formatting.Indented);
 

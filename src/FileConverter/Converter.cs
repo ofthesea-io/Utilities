@@ -52,8 +52,15 @@
 
                 if (processor != null)
                 {
+                    if (this.MetaData != null) 
+                        processor.MetaData = MetaData;
+
                     var result = await processor.Execute(data);
                     await this.Save(output, result);
+                }
+                else
+                {
+                    throw new NotSupportedException("Conversion process not found!");
                 }
             }
         }
@@ -88,7 +95,7 @@
                 throw new FileNotFoundException("Input file not found. Please enter a file!");
 
             if (File.ReadAllText(path).Length == 0)
-                throw new ArgumentException("No data found in file!");
+                throw new ArgumentException("No content found in file!");
         }
 
         /// <summary>
@@ -105,27 +112,6 @@
 
             if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar)) 
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
-        }
-
-        /// <summary>
-        ///     A very simple csv parse function to validate CSV content
-        /// </summary>
-        /// <param name="content">CSV content</param>
-        private void ParseCsv(ref string[] content)
-        {
-            if (content.Length == 0)
-                throw new NullReferenceException("CSV file is empty");
-
-            int columns = content[0].Split(this.Delimiter).Length;
-            if (columns == 1)
-                throw new InvalidDataException("Invalid delimiter!");
-
-            for (int i = 1; i < content.Length; i++)
-            {
-                int j = content[i].Split(this.Delimiter).Length;
-                if (j != columns)
-                    throw new InvalidDataException("CSV data validation failed!");
-            }
         }
 
         /// <summary>

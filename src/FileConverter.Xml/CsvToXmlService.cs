@@ -11,9 +11,15 @@
     [ExportMetadata("ConversionType", "CsvToXml")]
     public class CsvToXmlService : BaseService, IProcessor
     {
-        #region Methods
+        #region Properties
+
+        public object MetaData { get; set; }
 
         public string ConversionType { get; } = "CsvToXml";
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         ///     Converts the csv file into xml
@@ -22,12 +28,14 @@
         /// <returns>formatted xml string</returns>
         public async Task<string> Execute(string[] content)
         {
+            this.ParseCsv(ref content, (char)this.MetaData);
             return await Task.Run(() =>
             {
-                string[] keys = content[0].Split(base.Delimiter);
-                IEnumerable<Dictionary<string, string>> rawObject = content.Skip(1).Select(q => q.Split(base.Delimiter)
-                                                       .Select((x, y) => new {Key = keys[y].Trim(), Value = x})
-                                                       .ToDictionary(_ => _.Key, _ => _.Value));
+                string[] keys = content[0].Split((char)this.MetaData);
+                IEnumerable<Dictionary<string, string>> rawObject = content.Skip(1)
+                    .Select(q => q.Split((char)this.MetaData)
+                    .Select((x, y) => new {Key = keys[y].Trim(), Value = x})
+                    .ToDictionary(_ => _.Key, _ => _.Value));
 
                 XDocument xDocument = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"));
                 XElement root = new XElement("root");

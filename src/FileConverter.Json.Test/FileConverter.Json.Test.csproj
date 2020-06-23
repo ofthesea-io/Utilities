@@ -17,4 +17,16 @@
     <ProjectReference Include="..\FileConverter.Json\FileConverter.Json.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Documents\IncorrectExtension.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documents\InValid.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documents\Valid.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

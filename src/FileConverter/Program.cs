@@ -13,18 +13,18 @@
         {
             RootCommand command = new RootCommand
             {
-                new Option("--i", "Input file") {Argument = new Argument<string>()},
-                new Option("--o", "Output file") {Argument = new Argument<string>()},
-                new Option("--d", "Delimiter") {Argument = new Argument<char>()}
+                new Option("--i", "Input file") { Argument = new Argument<string>()},
+                new Option("--o", "Output file") { Argument = new Argument<string>()},
+                new Option("--m", "MetaData e.g. delimiter") { Argument = new Argument<char>()}
             };
 
-            command.Handler = CommandHandler.Create(async (string i, string o, char d) =>
+            command.Handler = CommandHandler.Create(async (string i, string o, char m) =>
             {
                 try
                 {
                     Converter converter = new Converter();
-                    if (d != '\0')
-                        converter.Delimiter = d;
+                    if (m != '\0')
+                        converter.MetaData = m;
 
                     await converter.Process(i, o);
                 }
