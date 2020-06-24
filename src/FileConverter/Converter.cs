@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -37,8 +36,8 @@
         /// <returns>Task or exception</returns>
         public async Task Process(string input, string output)
         {
-            this.ValidateOutputFile(output);
             this.ValidateInputFile(input);
+            this.ValidateOutputFile(output);
 
             this._outputExtension = this.GetFileExtension(output);
             this._inputExtension = this.GetFileExtension(input);
