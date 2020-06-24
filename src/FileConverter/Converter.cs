@@ -22,7 +22,7 @@
         public Converter(IConfiguration configuration)
         {
             this._confguration = configuration;
-            this.RegisterServices(this._confguration.GetPluginDirectory());
+            this.RegisterServices(this._confguration.PluginLocation);
         }
 
         #endregion

@@ -6,6 +6,6 @@ namespace FileConverter
 {
     public interface IConfiguration
     {
-        string GetPluginDirectory();
+        string PluginLocation { get; }
     }
 }

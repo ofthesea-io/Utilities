@@ -11,8 +11,6 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pugins", "Pugins", "{C82A9376-9D29-4E7B-8B36-E719367E6B48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Core", "FileConverter.Core\FileConverter.Core.csproj", "{BFE5C730-1EED-42FE-B3AD-68BF6FE4EA82}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{467E5D76-C5AC-44C4-BFC1-C29F46968742}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Json", "Plugins\FileConverter.Json\FileConverter.Json.csproj", "{61BA47C1-75C8-4718-8CEB-6251470F3665}"
@@ -22,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Json.Test", "Plugins\FileConverter.Json.Test\FileConverter.Json.Test.csproj", "{71105BAF-55D9-49DD-8B7C-A73A400855B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Xml.Test", "Plugins\FileConverter.Xml.Test\FileConverter.Xml.Test.csproj", "{A00F479F-233E-4360-88A9-40F916F20550}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Core", "FileConverter.Core\FileConverter.Core.csproj", "{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{A3681CDC-2641-4F51-B06D-EDE81D9882C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3681CDC-2641-4F51-B06D-EDE81D9882C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3681CDC-2641-4F51-B06D-EDE81D9882C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFE5C730-1EED-42FE-B3AD-68BF6FE4EA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFE5C730-1EED-42FE-B3AD-68BF6FE4EA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFE5C730-1EED-42FE-B3AD-68BF6FE4EA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFE5C730-1EED-42FE-B3AD-68BF6FE4EA82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +57,10 @@ Global
 		{A00F479F-233E-4360-88A9-40F916F20550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A00F479F-233E-4360-88A9-40F916F20550}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A00F479F-233E-4360-88A9-40F916F20550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

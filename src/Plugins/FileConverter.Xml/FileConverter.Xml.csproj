@@ -5,15 +5,19 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <OutputPath>c:\Build\Plugins</OutputPath>
+	  <OutputPath>c:\Build\Plugins\Debug\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <OutputPath>c:\Build\Plugins\Release\</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="System.Composition" Version="1.4.1" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FileConverter.Core\FileConverter.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\FileConverter.Core\FileConverter.Core.csproj" />
+	</ItemGroup>
 
 </Project>
