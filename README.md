@@ -43,7 +43,9 @@ Three ways to run the application:
 		- docker run visualsanity/utilities:latest --i Sample.csv --o Output.json
 
 ## Roadmap
-* Implement a Composition framework
-* Update parse function
-* Convert json to csv
-* Convert xml to csv
+- [x] Implement a Composition framework
+- [ ] Update parse function
+- [ ] Convert json to csv
+- [ ] Convert xml to csv
+- [ ] Convert xml to json
+- [ ] Convert json to xml
