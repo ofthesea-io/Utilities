@@ -2,20 +2,16 @@
 {
     using System;
     using System.IO;
-    using Json;
     using Moq;
     using NUnit.Framework;
-    using Xml;
 
     public class ConverterTests
     {
         #region Fields
 
-        private const char Delimiter = ',';
-
         private Converter _converter;
 
-        private Mock<IConfiguration> _moqConfiguration;
+        private IConfiguration _configuration;
 
         #endregion
 
@@ -24,8 +20,8 @@
         [SetUp]
         public void Setup()
         {
-            this._moqConfiguration = new Mock<IConfiguration>();
-            this._converter = new Converter(this._moqConfiguration.Object);
+            this._configuration = new Configuration();
+            this._converter = new Converter(this._configuration);
         }
 
         [Test]

@@ -27,10 +27,13 @@
 
         protected void RegisterServices(string pluginDirectory)
         {
+            if(string.IsNullOrEmpty(pluginDirectory))
+                throw new DirectoryNotFoundException("Plugin directory not found!");
+
             this._containerConfiguration = new ContainerConfiguration();
 
             IEnumerable<Assembly> assemblies = Directory
-                .GetFiles(pluginDirectory, "*.dll", SearchOption.TopDirectoryOnly)
+                .GetFiles(pluginDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath);
 
             this._containerConfiguration.WithAssemblies(assemblies);
