@@ -5,14 +5,24 @@
 
 ## Description
 
-A console application to convert CSV to JSON or XML. Currently, the console only implements a simple parse of the CSV. As long as the CSV is well-formed it can be of any length. As more data types get added the need to implement a full-blown factory like pattern with composition framework will become more essential. Right now, this stripped down version will suffice.
+A inline console application to convert data from one structure to another. The application uses the Composition Framework (MEF) via plugins. To create more conversion types, create your plugin by implementing the IComponent interface in Converter.Core. (see https://github.com/visualsanity/Utilities/tree/master/src/Plugins/FileConverter.Json)
+
+To create a plugin
+
+1. cd into your desired directory
+2. run `dotnet new MyPlugin classlib`. Change MyPlugin name to reflect your conversion you trying to achieve.
+3. Add the Coverter.Core nuget package to your project `Install-Package FileConverter.Core`
+4. Implement the IConverter interface from the FileConverter.Core package
+5. Implement the Process method to convert your files
+	* See https://github.com/visualsanity/Utilities/tree/master/src/Plugins/FileConverter.Json
+
 
 See roadmap for future updates.
 
 It takes three arguments:
 * --i -the input csv file
 * --o -the output file, either json and xml
-* --d -the csv delimiter
+* --m -the metadata that needs to be passed into the Process method e.g Delimiter type ","
 
 ## Description
 
@@ -20,11 +30,11 @@ Three ways to run the application:
 
 1. Clone the repository, and run the solution (FileConverter.sln)
 	* Set the launchSettings.json arguments:
-		--i Sample.csv --o output/output.json --d ,
+		--i Sample.csv --o output/output.json
 2. Clone and Build the application.
 	* Copy the FileConverter.exe to a directory
 	* There is a Sample.csv file to get you started
-	* From the commandline run: FileConverter.exe --i Sample.csv --o output.json --d ,	
+	* From the commandline run: FileConverter.exe --i Sample.csv --o output.json --m ,	
 3. Docker. 
 	* Copy the sample csv file from support/sample.csv into a desired directory
 	* Open the command line and run the following commands
