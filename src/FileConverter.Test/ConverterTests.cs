@@ -2,16 +2,15 @@
 {
     using System;
     using System.IO;
-    using Moq;
     using NUnit.Framework;
 
     public class ConverterTests
     {
         #region Fields
 
-        private Converter _converter;
-
         private IConfiguration _configuration;
+
+        private Converter _converter;
 
         #endregion
 

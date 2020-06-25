@@ -12,7 +12,7 @@
     {
         #region Methods
 
-        public object MetaData { get; set; }
+        public override object MetaData { get; set; }
 
         public string ConversionType { get; } = "CsvToJson";
 

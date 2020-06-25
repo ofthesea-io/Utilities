@@ -12,8 +12,6 @@
     {
         #region Fields
 
-        private readonly IConfigurationRoot _config;
-
         private readonly string _downloadLocation;
 
         private readonly IConfigurationSection _plugins;
@@ -28,9 +26,9 @@
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
 
-            this._config = builder.Build();
+            IConfigurationRoot config = builder.Build();
 
-            this._plugins = this._config.GetSection("Plugins");
+            this._plugins = config.GetSection("Plugins");
             this._downloadLocation = Path.GetTempPath() + this._plugins.GetSection("Name").Value;
 
             #if DEBUG
