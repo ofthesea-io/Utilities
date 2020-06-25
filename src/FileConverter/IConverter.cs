@@ -4,8 +4,16 @@
 
     public interface IConverter
     {
-        char Delimiter { get; set; }
+        #region Properties
+
+        object MetaData { get; set; }
+
+        #endregion
+
+        #region Methods
 
         Task Process(string input, string output);
+
+        #endregion
     }
 }

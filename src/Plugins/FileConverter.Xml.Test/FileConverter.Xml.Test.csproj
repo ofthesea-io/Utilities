@@ -13,19 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.14.3" />
     <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileConverter\FileConverter.csproj" />
-    <ProjectReference Include="..\Plugins\FileConverter.Json\FileConverter.Json.csproj" />
-    <ProjectReference Include="..\Plugins\FileConverter.Xml\FileConverter.Xml.csproj" />
+    <ProjectReference Include="..\FileConverter.Xml\FileConverter.Xml.csproj" />
   </ItemGroup>
 
   <ItemGroup>
