@@ -28,6 +28,7 @@
 
         protected void RegisterServices(string pluginDirectory)
         {
+
             if (string.IsNullOrEmpty(pluginDirectory))
                 throw new DirectoryNotFoundException("Plugin directory not found!");
 

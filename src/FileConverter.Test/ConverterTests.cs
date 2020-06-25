@@ -2,15 +2,19 @@
 {
     using System;
     using System.IO;
+    using System.Reflection;
+    using Moq;
     using NUnit.Framework;
 
     public class ConverterTests
     {
         #region Fields
 
-        private IConfiguration _configuration;
+        private Mock<IConfiguration> _moqConfiguration;
 
         private Converter _converter;
+
+        private string _directory;
 
         #endregion
 
@@ -19,8 +23,10 @@
         [SetUp]
         public void Setup()
         {
-            this._configuration = new Configuration();
-            this._converter = new Converter(this._configuration);
+            this._directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            this._moqConfiguration = new Mock<IConfiguration>();
+            this._moqConfiguration.SetupGet(x => x.PluginLocation).Returns(this._directory);
+            this._converter = new Converter(this._moqConfiguration.Object);
         }
 
         [Test]
