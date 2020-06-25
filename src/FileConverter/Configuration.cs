@@ -31,11 +31,11 @@
             this._config = builder.Build();
 
             this._plugins = this._config.GetSection("Plugins");
+            this._downloadLocation = Path.GetTempPath() + this._plugins.GetSection("Name").Value;
 
             #if DEBUG
             this.PluginLocation = this._plugins.GetSection("Debug").Value;
             #else
-            this._downloadLocation = Path.GetTempPath() + this._plugins.GetSection("Name").Value;
             this.Init();
             #endif
         }
@@ -81,7 +81,7 @@
                     webClient.DownloadFile(uri, download);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new FileNotFoundException("Downloaded file not found!");
             }
