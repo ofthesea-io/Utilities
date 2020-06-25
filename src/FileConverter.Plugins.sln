@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Json", "Plugins\FileConverter.Json\FileConverter.Json.csproj", "{61BA47C1-75C8-4718-8CEB-6251470F3665}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Xml", "Plugins\FileConverter.Xml\FileConverter.Xml.csproj", "{B6C31C09-918C-4816-BBD6-4E01FF6F9AF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Json.Test", "Plugins\FileConverter.Json.Test\FileConverter.Json.Test.csproj", "{71105BAF-55D9-49DD-8B7C-A73A400855B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Xml.Test", "Plugins\FileConverter.Xml.Test\FileConverter.Xml.Test.csproj", "{A00F479F-233E-4360-88A9-40F916F20550}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.Core", "FileConverter.Core\FileConverter.Core.csproj", "{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BA47C1-75C8-4718-8CEB-6251470F3665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6C31C09-918C-4816-BBD6-4E01FF6F9AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C31C09-918C-4816-BBD6-4E01FF6F9AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C31C09-918C-4816-BBD6-4E01FF6F9AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C31C09-918C-4816-BBD6-4E01FF6F9AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71105BAF-55D9-49DD-8B7C-A73A400855B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71105BAF-55D9-49DD-8B7C-A73A400855B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71105BAF-55D9-49DD-8B7C-A73A400855B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71105BAF-55D9-49DD-8B7C-A73A400855B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00F479F-233E-4360-88A9-40F916F20550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00F479F-233E-4360-88A9-40F916F20550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00F479F-233E-4360-88A9-40F916F20550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00F479F-233E-4360-88A9-40F916F20550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F13AF6-4B11-4F58-89CA-019A7A7E2AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C06C7570-D8AF-42D5-B725-48FF700ACF52}
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_StartDate = 2000/1/1
+		BuildVersion_ConfigurationName = Release
+		BuildVersion_DetectChanges = False
+	EndGlobalSection
+EndGlobal
