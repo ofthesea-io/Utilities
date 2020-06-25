@@ -7,7 +7,7 @@
 
 A inline console application to convert data from one structure to another. The application uses the Composition Framework (MEF) via plugins. To create more conversion types, create your plugin by implementing the IComponent interface in Converter.Core. (see https://github.com/visualsanity/Utilities/tree/master/src/Plugins/FileConverter.Json)
 
-To create a plugin
+### To create a plugin
 
 1. cd into your desired directory
 2. run `dotnet new MyPlugin classlib`. Change MyPlugin name to reflect your conversion you trying to achieve.
