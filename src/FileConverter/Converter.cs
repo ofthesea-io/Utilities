@@ -100,7 +100,7 @@
 
             if (File.ReadAllText(path).Length == 0)
             {
-                throw new ArgumentException("No content found in file!")
+                throw new ArgumentException("No content found in file!");
             }
         }
 
