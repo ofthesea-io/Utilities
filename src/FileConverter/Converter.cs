@@ -94,10 +94,14 @@
         private void ValidateInputFile(string path)
         {
             if (!File.Exists(path))
+            {
                 throw new FileNotFoundException("Input file not found. Please enter a file!");
+            }
 
             if (File.ReadAllText(path).Length == 0)
-                throw new ArgumentException("No content found in file!");
+            {
+                throw new ArgumentException("No content found in file!")
+            }
         }
 
         /// <summary>
@@ -107,13 +111,14 @@
         private void ValidateOutputFile(string path)
         {
             if (string.IsNullOrEmpty(path))
+            {
                 throw new FileNotFoundException("Output file not found. Please enter a file!");
+            }
 
-            if (string.IsNullOrEmpty(path))
-                throw new ArgumentException("Incorrect output");
-
-            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar)) 
+            if (path.Contains(Path.DirectorySeparatorChar) || path.Contains(Path.AltDirectorySeparatorChar))
+            {
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
+            }
         }
 
         /// <summary>
